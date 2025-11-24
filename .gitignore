@@ -1,0 +1,62 @@
+# .vscode
+.vscode/
+
+# Compile Flags
+compile_flags.txt
+
+# Files for testing InputOutput
+io_tests
+
+# macOS system files
+.DS_Store
+
+# Executables
+*.out
+*.exe
+*.app
+
+# Build directories
+bin/
+out/
+obj/
+build/
+
+# macOS system files
+.DS_Store
+
+# IDE-specific files
+*.o
+*.obj
+*.log
+*.user
+*.suo
+*.vcxproj*
+
+# LaTeX intermediate and output files
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fls
+*.fdb_latexmk
+*.log
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.lof
+*.lot
+
+# Editor backup files
+*~
+*.swp
+*.bak
+*.backup
+
+# Latexmk generated folder (optional)
+latex.out/
+
+# TeXShop/TeXworks specific
+*.synctex(busy)
