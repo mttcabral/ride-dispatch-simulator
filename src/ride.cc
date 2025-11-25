@@ -18,8 +18,8 @@ void Ride::AddRequest(Request *request) { requests_.push_back(request); }
 
 void Ride::AddSegment(Segment *segment) {
   segments_.push_back(segment);
-  total_distance_ += segment->getDistance();
-  total_duration_ += segment->getTime();
+  total_distance_ += segment->GetDistance();
+  total_duration_ += segment->GetTime();
 }
 
 // Helper to calculate distance between two coordinate strings
@@ -48,12 +48,12 @@ void Ride::UpdateRoute(double speed) {
   Vector<Stop *> stops;
   // Pickups
   for (size_t i = 0; i < requests_.size(); ++i) {
-    stops.push_back(
-        new Stop(requests_[i]->GetOrigin(), PICKUP, requests_[i]->GetId()));
+    stops.push_back(new Stop(requests_[i]->GetOrigin(), StopType::kPickup,
+                             requests_[i]->GetId()));
   }
   // Dropoffs
   for (size_t i = 0; i < requests_.size(); ++i) {
-    stops.push_back(new Stop(requests_[i]->GetDestination(), DROPOFF,
+    stops.push_back(new Stop(requests_[i]->GetDestination(), StopType::kDropoff,
                              requests_[i]->GetId()));
   }
 
@@ -61,17 +61,19 @@ void Ride::UpdateRoute(double speed) {
   for (size_t i = 0; i < stops.size() - 1; ++i) {
     Stop *start = stops[i];
     Stop *end = stops[i + 1];
-    double dist = calcDist(start->getCoordinate(), end->getCoordinate());
+    double dist = calcDist(start->GetCoordinate(), end->GetCoordinate());
     double time = (speed > 0) ? dist / speed : 0;
 
-    SegmentType type = DISPLACEMENT_SEGMENT;
+    SegmentType type = SegmentType::kDisplacement;
 
-    if (start->getType() == PICKUP && end->getType() == PICKUP) {
-      type = PICKUP_SEGMENT;
-    } else if (start->getType() == DROPOFF && end->getType() == DROPOFF) {
-      type = DROPOFF_SEGMENT;
+    if (start->GetType() == StopType::kPickup &&
+        end->GetType() == StopType::kPickup) {
+      type = SegmentType::kPickup;
+    } else if (start->GetType() == StopType::kDropoff &&
+               end->GetType() == StopType::kDropoff) {
+      type = SegmentType::kDropoff;
     } else {
-      type = DISPLACEMENT_SEGMENT;
+      type = SegmentType::kDisplacement;
     }
 
     AddSegment(new Segment(start, end, dist, time, type));

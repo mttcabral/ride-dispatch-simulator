@@ -2,7 +2,7 @@
 
 Segment::Segment()
     : start_(nullptr), end_(nullptr), distance_(0.0), time_(0.0),
-      type_(kDisplacement) {}
+      type_(SegmentType::kDisplacement) {}
 
 Segment::Segment(Stop *s, Stop *e, double dist, double t, SegmentType seg_type)
     : start_(s), end_(e), distance_(dist), time_(t), type_(seg_type) {}

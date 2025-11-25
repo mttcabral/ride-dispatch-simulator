@@ -8,7 +8,7 @@
  *
  * Segments are classified based on the type of stops at their endpoints.
  */
-enum SegmentType {
+enum class SegmentType {
   kPickup,      /**< A segment connecting two pickup stops. */
   kDropoff,     /**< A segment connecting two drop-off stops. */
   kDisplacement /**< A segment connecting a pickup to a drop-off, or vice versa.
